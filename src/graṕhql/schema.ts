@@ -1,57 +1,33 @@
 import { makeExecutableSchema } from 'graphql-tools';
-import Users from '../models/Users';
+import { merge } from 'lodash'
+//resolvers
+import { userResolvers } from './resources/users/users.resolvers'
 
-const users: any[] = [
-    {
-        id:1,
-        name: 'luis',
-        email: 'luisjnk@gmail.com',
-        password: '1234'
-    },
-    {
-        id:2,
-        name: 'luis2',
-        email: 'luis2jnk@gmail.com',
-        password: '12344'
-    }
-]
+//schemas
+import { userTypes } from './resources/users/users.schema'
+import { tokenTypes } from './resources/token/token.schema'
 
-const typeDefs = `
-    type User {
-        id: ID!,
-        name: String!
-        email: String!,
-        password: String!
-    }
+//
+import { Query } from './query';
+import { Mutation } from './mutation';
 
-    type Query {
-        allUsers: [User!]!
-    }
+import Users from '../models/Users.model';
 
-    type Mutation {
-        createUser(name : String!, email : String!, password : String!) : User
-    }
-`
+const SchemaDefinition = `
+type Schema{
+    query: Query,
+    mutation: Mutation
+}`
 
-const resolvers = {
-    Query: {
-        allUsers: () => users
-    },
-    Mutation: {
-        createUser : (parent, args) => {
-            //const newUser = Object.assign(args);
-            //users.push(newUser);
-            console.log('aqui', args)
+const resolvers = merge(userResolvers)
 
-            let user = new Users({
-                name : args.name,
-                email : args.email,
-                password : args.password
-            })
-            console.log('aqui2', args)
-            return user.save();
-        }
-    }
-}
 
-export default makeExecutableSchema({typeDefs, resolvers})
+export default makeExecutableSchema({
+    typeDefs: [
+        SchemaDefinition,
+        Query,
+        Mutation,
+        userTypes,
+        tokenTypes
+    ], resolvers
+})

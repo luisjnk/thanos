@@ -34,3 +34,5 @@ export const onListening = (server: Server) => {
         console.log(`Listening at ${bind}...`);
     }
 }
+
+export const JWT_SECRET: string = process.env.JWT_SECRET
