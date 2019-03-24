@@ -1,12 +1,16 @@
 import * as express from 'express'
 import * as graphqlHTTP from 'express-graphql'
 import schema from './graṕhql/schema';
+import * as cors from 'cors';
+
 class App {
 
     public express: express.Application;
 
     constructor() {
         this.express = express();
+        console.log(cors)
+        this.express.use(cors())
         this.middleware()
     }
 
