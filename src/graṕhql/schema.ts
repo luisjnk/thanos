@@ -2,6 +2,8 @@ import { makeExecutableSchema } from 'graphql-tools';
 import { merge } from 'lodash'
 //resolvers
 import { userResolvers } from './resources/users/users.resolvers'
+import { tokenResolvers } from './resources/token/token.resolvers';
+
 
 //schemas
 import { userTypes } from './resources/users/users.schema'
@@ -19,7 +21,10 @@ type Schema{
     mutation: Mutation
 }`
 
-const resolvers = merge(userResolvers)
+const resolvers = merge(
+    userResolvers,
+    tokenResolvers
+    )
 
 
 export default makeExecutableSchema({
