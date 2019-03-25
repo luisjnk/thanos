@@ -1,6 +1,7 @@
 import { RequestHandler, Request, Response, NextFunction } from "express";
 import { JWT_SECRET } from "../utils/utils";
 import * as jwt from 'jsonwebtoken';
+import { findUserbyId } from '../core/actions/user.actions';
 
 export const extractJwtMiddleware = (): RequestHandler => {
     return (req: Request, res: Response, next: NextFunction): void => {
@@ -10,8 +11,19 @@ export const extractJwtMiddleware = (): RequestHandler => {
         req['context'] = {};
         req['context']['authorization'] = authorization
 
-        jwt.verify(token, JWT_SECRET, (err, decoded) => {
+        jwt.verify(token, JWT_SECRET, (err, decoded: any) => {
             if (!token) { return next(); }
+
+            const user: any = findUserbyId(decoded.sub)
+            if (user) {
+                req['context']['user'] = {
+                    id: user._id,
+                    email: user.email
+                }
+
+                return next();
+            }
+
         })
     };
 
