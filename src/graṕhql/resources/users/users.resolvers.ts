@@ -1,13 +1,18 @@
 import Users from '../../../models/Users.model';
 import { genSaltSync, hashSync, compareSync } from 'bcryptjs'
 import { GraphQLResolveInfo } from 'graphql';
+import { compose } from '../../composable/composable.resolver';
+import { authResolver } from '../../composable/auth.resolver';
+import { verifyTokenResolver } from '../../composable/verify-token.resolver';
+import { AuthUser } from '../../../interfaces/AuthUserInterface';
+
 export const userResolvers = {
     Query: {
-        users: (parent, args, { mongoose }, info: GraphQLResolveInfo) => {
+        users: compose(authResolver, verifyTokenResolver)((parent, args, { mongoose }, info: GraphQLResolveInfo) => {
             return Users.find({}, (err: any, user) => {
                 console.log(user)
             });
-        },
+        }),
         user: (parent, args, { mongoose }, info: GraphQLResolveInfo) => {
             return Users.findOne({}, (err: any, user) => {
                 console.log(user);
@@ -15,7 +20,7 @@ export const userResolvers = {
         }
     },
     Mutation: {
-        createUser: (parent, args, { mongoose }, info: GraphQLResolveInfo) => {
+        createUser: (parent, args, { mongoose, authUser: AuthUser }, info: GraphQLResolveInfo) => {
             //const newUser = Object.assign(args);
             //users.push(newUser);
             console.log('aqui', args)
@@ -35,7 +40,7 @@ export const userResolvers = {
 
             return user.save();
         },
-        updateUser: (parent, {input}, { mongoose }, info: GraphQLResolveInfo) => {
+        updateUser: (parent, {input}, { mongoose,  authUser: AuthUser }, info: GraphQLResolveInfo) => {
             console.log('updateUSer')
         },
         updatePassword: (parent, {id, input}, { mongoose }, info: GraphQLResolveInfo) => {

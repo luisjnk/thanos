@@ -1,0 +1,10 @@
+{
+    "development": {
+        "databaseconfigs": {
+            "auroradb": "/home/luis/Desktop/files/configs/auroradb.config.json",
+            "mongo": "/home/luis/projects/files/configs/mongo.config.json"
+        }
+        
+    },
+    "production": {}
+}

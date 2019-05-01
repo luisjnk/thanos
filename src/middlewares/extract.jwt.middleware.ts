@@ -12,7 +12,9 @@ export const extractJwtMiddleware = (): RequestHandler => {
         req['context']['authorization'] = authorization
 
         jwt.verify(token, JWT_SECRET, (err, decoded: any) => {
+    
             if (!token) { return next(); }
+            if (err) { return next(); }
 
             const user: any = findUserbyId(decoded.sub)
             if (user) {

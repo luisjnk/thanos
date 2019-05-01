@@ -2,8 +2,11 @@ import * as http from 'http';
 import app from './app';
 import { normalizePort, onError, onListening } from './utils/utils';
 import * as mongoose from 'mongoose';
+import AuroraDBConnection from './infra/connect/auroraDB.connect';
 
-mongoose.connect('mongodb://localhost:27017/thanos')
+AuroraDBConnection.connect();
+
+mongoose.connect('mongodb://localhost:27017/thanos' )
 mongoose.connection.once('open', () => {
     console.log('connected into database')
 })
