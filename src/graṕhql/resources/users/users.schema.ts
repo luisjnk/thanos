@@ -5,12 +5,17 @@ const userTypes = `
         email: String!,
         password: String!
         photo: String
+        username: String!
+        roleName: String!
+        idUser: Int
     }
 
     input UserCreateInput {
         name: String!
+        username: String!
         email: String!
         password: String!
+        roleName: String!
     }
 
     input UserUpdateInput {
