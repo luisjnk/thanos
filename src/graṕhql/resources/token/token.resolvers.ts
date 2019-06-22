@@ -19,7 +19,7 @@ export const tokenResolvers = {
             
                 const payload = { sub: user.idUser }
                 const token = { token: jwt.sign(payload, JWT_SECRET) }
-                resolve({ token: jwt.sign(payload, JWT_SECRET) })
+                resolve({ token: jwt.sign(payload, JWT_SECRET), success: 'true' })
 
                /* Users.findOne({ email: email }, (err: any, user: any) => {
                     let errorMessage: string = "Unauthorized, wrong email or password"
