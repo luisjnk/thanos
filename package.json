@@ -36,6 +36,7 @@
     "graphql-tools": "^2.3.0",
     "jsonwebtoken": "8.1.0",
     "loadash": "1.0.0",
+    "moment": "^2.24.0",
     "mongoose": "^5.4.19",
     "mysql": "^2.17.1"
   }

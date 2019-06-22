@@ -2,7 +2,7 @@ import * as express from 'express'
 import * as graphqlHTTP from 'express-graphql'
 import schema from './graṕhql/schema';
 import * as cors from 'cors';
-import mongoose from './connect/DBConnect';
+//import mongoose from './connect/DBConnect';
 import { extractJwtMiddleware } from './middlewares/extract.jwt.middleware';
 
 class App {
@@ -22,12 +22,15 @@ class App {
 
             extractJwtMiddleware(),
             (req, res, next) => {
-                req['context'].mongoose = mongoose;
+                console.log('AQUI')
+                console.log('AQUI', req['context'])
+
+                //req['context'].mongoose = mongoose;
                 next();
             }, graphqlHTTP((req) => ({
                 schema: schema,
                 graphiql: process.env.NODE_ENV === 'development',
-                context: req['context']
+                //context: req['context']
             })))
     }
 }

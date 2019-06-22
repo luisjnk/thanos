@@ -5,6 +5,12 @@ import * as mongoose from 'mongoose';
 import { connect } from './infra/mysql/'
 
 /*mongoose.connect('mongodb://localhost:27017/thanos')
+=======
+import AuroraDBConnection from './infra/connect/auroraDB.connect';
+
+AuroraDBConnection.connect();
+
+mongoose.connect('mongodb://localhost:27017/thanos' )
 mongoose.connection.once('open', () => {
     console.log('connected into database')
 }*/
