@@ -21,7 +21,7 @@
     "@types/lodash": "^4.14.123",
     "@types/node": "8.0.34",
     "bcryptjs": "2.4.1",
-    "gulp": "3.9.1",
+    "gulp": "4.0.2",
     "gulp-clean": "0.3.2",
     "gulp-typescript": "3.2.2",
     "nodemon": "^1.18.10",
