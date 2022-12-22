@@ -34,7 +34,7 @@
     "express-graphql": "^0.6.11",
     "graphql": "^0.11.7",
     "graphql-tools": "^2.3.0",
-    "jsonwebtoken": "8.1.0",
+    "jsonwebtoken": "9.0.0",
     "loadash": "1.0.0",
     "moment": "^2.24.0",
     "mongoose": "^5.4.19",
